@@ -12,10 +12,15 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/", index)
+	http.HandleFunc("/", indexHandler)
+	http.HandleFunc("/favicon.ico", faviconHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
-func index(w http.ResponseWriter, req *http.Request) {
+func indexHandler(w http.ResponseWriter, req *http.Request) {
 	tpl.ExecuteTemplate(w, "index.gohtml", nil)
+}
+
+func faviconHandler(w http.ResponseWriter, req *http.Request) {
+	http.ServeFile(w, req, "assets/favicon.ico")
 }
