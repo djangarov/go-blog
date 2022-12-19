@@ -11,6 +11,25 @@
 <body>
     <h1>Go Blog</h1>
 
+    <h1>Cookie Session:</h1>
+
+    {{(index .SessionValue)}}
+
+    <br />
+
+    <h1>Images:</h1>
+
+    {{ $length := len .Images }} {{ if eq $length 0 }}
+        <p>No Images</p>
+    {{else}}
+        {{range .Images}}
+            <img src="/public/upload/{{.}}" width="400px">
+
+            <br />
+        {{end}}
+    {{end}}
+
+
     <form action="/fileupload" method="post" enctype="multipart/form-data">
         <input type="file" name="nf">
         <input type="submit">
